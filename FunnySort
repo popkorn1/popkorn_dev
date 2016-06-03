@@ -1,0 +1,85 @@
+package com.sonali.test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ArrayTest {
+
+	public static void main(String[] args) {
+//		List<Integer> list = new ArrayList<Integer>();
+//		Integer last = list.remove(list.size()-1);
+//		list.add(i, last);
+		List<Integer> list = new ArrayList<Integer>();
+		
+		list.add(1);
+		list.add(8);
+		list.add(2);
+		list.add(5);
+		list.add(3);
+				
+		funnySort(list);		
+		printList(list);
+		System.out.println("------------");
+		
+		//Test - Sorted List
+		list.clear();
+		list.add(1);
+		list.add(3);
+		list.add(5);
+		list.add(7);
+		list.add(9);
+		funnySort(list);		
+		printList(list);
+		System.out.println("------------");
+		
+		//Test - Reverse sorted
+		list.clear();
+		list.add(9);
+		list.add(7);
+		list.add(5);
+		list.add(3);
+		list.add(1);
+		funnySort(list);		
+		printList(list);
+		System.out.println("------------");
+	}
+	
+	public static void printList(List<Integer> list) {
+		StringBuilder sb = new StringBuilder();
+		for(Integer element : list) {
+			sb.append(Integer.toString(element)).append(" ");
+		}
+		System.out.println(sb.toString());
+	}
+	
+	public static void funnySort(List<Integer> unsortedList) {
+		
+		if(unsortedList == null || unsortedList.isEmpty())
+			return;
+		
+		int e1;
+		int e2;
+		
+		for(int i=0;i<unsortedList.size();i++) {
+	        for(int j=i+1;j<unsortedList.size();j++) {	        	
+	        	e1 = unsortedList.get(i);
+	        	e2 = unsortedList.get(j);	        	
+	        	if(e1 > e2) {
+	        		unsortedList.set(i, e2);
+	        		unsortedList.set(j, e1);
+	        	}
+	        }	        	       
+	    }
+		
+		//Funny sort now
+		for(int i=1; i<unsortedList.size();) {
+			int lastElement = unsortedList.get(unsortedList.size()-1);
+			for(int j=unsortedList.size()-1; j>i;j--) {
+				unsortedList.set(j, unsortedList.get(j-1));
+			}
+			unsortedList.set(i, lastElement);
+			i+=2;
+		}
+	}
+
+}
